@@ -37,12 +37,15 @@ function Payment() {
       });
   }, []);
 
+   const [price, setPrice] = useState(199)
+
   return (
     <>
       <h1>React Stripe and the Payment Element</h1>
+      <h1>Rs. {price}</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
+          <CheckoutForm  price={price}/>
         </Elements>
       )}
     </>

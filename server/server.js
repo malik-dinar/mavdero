@@ -27,6 +27,7 @@ connectDb();
 const detailsSchema = new mongoose.Schema({
   userName: String,
   date: { type: Date, default: Date.now },
+  price : Number
 });
 
 // Create a model using the schema
@@ -52,12 +53,14 @@ app.get("/config", (req, res) => {
 
 app.post("/payment", async (req, res) => {
   console.log(req.body);
-  req.body.userName;
 
   const details = new Details({
     userName: req.body.userName,
     date: Date.now(),
+    price: req.body.price
   });
+
+  console.log(details);
 
   // Save the details object to MongoDB
   await details.save();

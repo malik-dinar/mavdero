@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ price }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -31,9 +31,8 @@ export default function CheckoutForm() {
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
-      console.log(userName);
       axios
-        .post("/payment", { userName })
+        .post("/payment", { userName, price })
         .then(async () => {
           setMessage("Payment Sucess");
         })
